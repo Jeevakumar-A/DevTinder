@@ -3,7 +3,6 @@
 - second the server listen its api call...
 - Most properly the database are connect to vscode or any compiler by async funtion-->which wait for the calls  and till the hold the function after get the calls the excution will run
 # How to connect our database(MongoDB)
-- mongodb+srv://JeevaNode:F3PFEIDjWIDJ7aGc@jeevanode.zywybm5.mongodb.net
 - THis the user name and password of our cluster
 - cluster it our own database..
 - which is used to store and work on your project
