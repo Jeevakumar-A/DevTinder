@@ -28,3 +28,10 @@
 await save()-->this function to store the data to the database
 - becasuse the await hold the function at the  of save data complete its exection...
 then call on the API it runs refresh DB ---> THe DB  Update...
+
+# express.json()
+- express.json is a build in middleware function in express
+the parse incomming requests with JSON payloads
+- and makes the data availablity under req.body
+- without the express.json()-->is undefined..
+- how it run by the postman sends a POST/PUT request with JSON data..
