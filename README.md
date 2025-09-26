@@ -35,3 +35,9 @@ the parse incomming requests with JSON payloads
 - and makes the data availablity under req.body
 - without the express.json()-->is undefined..
 - how it run by the postman sends a POST/PUT request with JSON data..
+
+# Database schema advance
+- "type" is fix what type of datatype what from the user like String,Number etc...
+- "maxlength","minlenght"-->used to apply the maximum, minimum length of the password or username
+- validata function handle the validate data on the data field, also validatefunction if you write then the update pov need the runValidator:true handle the exact validation of the validation function suppose it fail it throws an errror..
+-"timestanps" is the other object for the schema which {schema data},{timestamps:true}-->it store the created data and if you update any thing it also store with date time and secs..

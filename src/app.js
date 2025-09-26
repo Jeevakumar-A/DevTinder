@@ -9,65 +9,65 @@ app.use(express.json())
 
 
 //Get the data in particular data from the database:-
-// app.get("/getelement",async (req,res)=>{
-//     const user =req.body.Email;
-//     try{
-//         const UserEmail=await UserModel.find({Email:user})
-//         if(UserEmail.length===0){
-//             res.status(404).send("User not Found")
-//         }
-//         else{
-//             res.send(UserEmail)
+app.get("/getelement",async (req,res)=>{
+    const user =req.body.Email;
+    try{
+        const UserEmail=await UserModel.find({Email:user})
+        if(UserEmail.length===0){
+            res.status(404).send("User not Found")
+        }
+        else{
+            res.send(UserEmail)
 
     
-//         }
-//     }
-//     catch(err){
-//         console.err(err);
-//         res.status.send("Something went wrong");
-//     }
-// })
+        }
+    }
+    catch(err){
+        console.err(err);
+        res.status.send("Something went wrong");
+    }
+})
 
-//Get all data from the database
-// app.get("/getelement",async (req,res)=>{
-//     const user =req.body.Email;
-//     try{
-//         const UserEmail=await UserModel.findOne({Email:user})
-//         if(UserEmail.length===0){
-//             res.status(404).send("User not Found")
-//         }
-//         else{
-//             res.send(UserEmail)
-//         }
-//     }
-//     catch(err){
-//         console.log(err);
-//         res.status.send("Something went wrong");
-//     }
-// })
+// Get all data from the database
+app.get("/getelement",async (req,res)=>{
+    const user =req.body.Email;
+    try{
+        const UserEmail=await UserModel.findOne({Email:user})
+        if(UserEmail.length===0){
+            res.status(404).send("User not Found")
+        }
+        else{
+            res.send(UserEmail)
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status.send("Something went wrong");
+    }
+})
 
 //Delete the data on the DB help of API call
-// app.delete("/delete",async (req,res)=>{
-//     const user =req.body._id;
-//     try{
-//         const UserEmail=await UserModel.findByIdAndDelete({_id:user})
-//             res.send("User data deleted successfully")
+app.delete("/delete",async (req,res)=>{
+    const user =req.body._id;
+    try{
+        const UserEmail=await UserModel.findByIdAndDelete({_id:user})
+            res.send("User data deleted successfully")
 
     
 
-//     }
-//     catch(err){
-//         console.log(err);
-//         res.status(404).send("Something went wrong");
-//     }
-// })
+    }
+    catch(err){
+        console.log(err);
+        res.status(404).send("Something went wrong");
+    }
+})
 
 //Update on the DB with help of API call
 app.patch("/update",async (req,res)=>{
     const user =req.body._id;
     const userID =req.body;
     try{
-        await UserModel.findByIdAndUpdate({_id:user},userID)
+        await UserModel.findByIdAndUpdate({_id:user},userID,{runValidators:true})
         res.send("User data updated successfully")
     }
     catch(err){
