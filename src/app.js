@@ -10,6 +10,26 @@ app.use(express.json())
 //express.json is the middleware function-->Hanles the incomming request with JSON payloads from the postman/react frontend
 
 
+app.get("/test",(req,res,next)=>{
+
+console.log("Hello from the middleware 1");
+    next();
+},
+(req,res,next)=>{
+    console.log("Hello from the middleware 2");
+    next();
+},
+(req,res,next)=>{
+    console.log("Hello from the middleware 3");
+    next();
+    
+},
+(req,res)=>{
+    res.send("Hello from the Middleware 4");
+}
+)
+=======
+
 //Get the data in particular data from the database:-
 app.get("/getelement",async (req,res)=>{
     const user =req.body.Email;
