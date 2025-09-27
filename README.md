@@ -53,3 +53,11 @@ the parse incomming requests with JSON payloads
 }
 -also router pov--->:id-->for params to navigate the data based on the "id"
 - req.body._id==>req.params._id is good practice.
+
+# Encrypting password
+
+- first of all encrypt password with the help of the library is bcrypt is used to encrypt our password which is in unreadable format..
+- bcrypt always return a promises
+- if change password to encrypt methoda bcrypt.hash(Plaintext,saltrounds)
+- saltrounds is random stuff-->random character are simultinoulsy loop its data
+- also the bcryt.compare(plaintext,hash)-->which used to compare the password and it return a boolean
