@@ -63,11 +63,19 @@ app.delete("/delete",async (req,res)=>{
 })
 
 //Update on the DB with help of API call
-app.patch("/update",async (req,res)=>{
-    const user =req.body._id;
-    const userID =req.body;
+app.patch("/update/:_id",async (req,res)=>{
+    const userID =req.params._id;
+    const user =req.body;
     try{
-        await UserModel.findByIdAndUpdate({_id:user},userID,{runValidators:true})
+        const allowable_updates=["Password","Gender","skills","photo","Age"]
+        const isallowed =Object.keys(user).every((k)=>allowable_updates.includes(k));
+        if(!isallowed){
+            res.status(400).send("Update Failed");
+        }
+        if(user?.skills.length>10){
+            res.status(400).send("10 skills only limited");
+        }
+        await UserModel.findByIdAndUpdate({_id:userID},user,{runValidators:true})
         res.send("User data updated successfully")
     }
     catch(err){

@@ -41,3 +41,15 @@ the parse incomming requests with JSON payloads
 - "maxlength","minlenght"-->used to apply the maximum, minimum length of the password or username
 - validata function handle the validate data on the data field, also validatefunction if you write then the update pov need the runValidator:true handle the exact validation of the validation function suppose it fail it throws an errror..
 -"timestanps" is the other object for the schema which {schema data},{timestamps:true}-->it store the created data and if you update any thing it also store with date time and secs..
+
+# validator library:-
+- Install validator-npm i validator
+- import to our code by const validator =require("validator")
+- is used to validator all schema level/code level datas validatable or not
+- in schema level-->validate(value){
+    if(!validator.isXXXX(value)){
+        throw new Error("XXXXXXX"+value)
+    }
+}
+-also router pov--->:id-->for params to navigate the data based on the "id"
+- req.body._id==>req.params._id is good practice.
