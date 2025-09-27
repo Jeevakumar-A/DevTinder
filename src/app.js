@@ -1,7 +1,9 @@
 const {ConnectDB }=require("./config/database");//import mongoose from "./config/database.js"
 const express =require("express");//import express from "express";
 const app=express();//create an express application
-const UserModel =require("./models/user")
+const UserModel =require("./models/user");
+const {ValidateData} =require("./utils/validation")
+const bcrypt =require("bcrypt")
 
 app.use(express.json())
 //use()-->Handles the all routes-->so we put the express.json() inside it
@@ -84,11 +86,48 @@ app.patch("/update/:_id",async (req,res)=>{
     }
 })
 app.post("/signup",async (req,res)=>{
-// console.log(req.body)//it from the postman api-->request to the body then the body data are JSON will send by api
-//Create a new instance of the user model
-const user =new UserModel(req.body);
-await user.save();
-res.send("User data added successfully")
+    try{
+        const{FirstName,LastName,Email,Password}=req.body;
+        //Validation the data
+        ValidateData(req);
+
+        //Encrypting the password
+        const PasswordEncrypt=await bcrypt.hash(Password,10);
+
+    // console.log(req.body)//it from the postman api-->request to the body then the body data are JSON will send by api
+    //Create a new instance of the user model
+    const user =new UserModel({FirstName,LastName,Email,Password:PasswordEncrypt});
+    await user.save();
+    res.send("User data added successfully")
+
+    }
+
+catch(err){
+    res.status(400).send("Error:"+err.message);
+    
+}
+})
+//Login
+app.post("/Login",async (req,res)=>{
+    try{
+        const{Email,Password}=req.body;
+        const user=await UserModel.findOne({Email:Email})
+        if(!user){
+            throw new Error("Invalid Email Address");
+        }
+        const PasswordHash=await bcrypt.compare(Password,user.Password)
+        if(PasswordHash){
+            res.send("Login successfully..!!!")
+        }
+        else{
+            res.send("Login Failed.....")
+        }
+
+    }
+    catch(err){
+    res.status(400).send("Error:"+err.message);
+    
+}
 })
 
 

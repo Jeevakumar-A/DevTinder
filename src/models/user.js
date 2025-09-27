@@ -37,12 +37,12 @@ const UserSchema = new mongoose.Schema({
     },
     Password:{
         type:String,
+        required:true,
                 validate(value){
-            if(!validator.isPassportNumber(value)){
+            if(!validator.isStrongPassword(value)){
                 throw new Error("Invalid  Password"+value)
             }
         },
-        lowercase:true,
 
     },
     photo:{
